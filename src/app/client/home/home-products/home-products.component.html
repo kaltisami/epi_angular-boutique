@@ -1,0 +1,24 @@
+<style>
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+      
+    .product-item {
+    flex: 1 0 21%;
+    margin: 1em;
+    box-sizing: border-box;
+    }
+</style>
+
+<h1>{{title}}</h1>
+<div class="product-list">
+  <div *ngFor="let produit of produits" class="product-item">
+    <img style="width: 100px;" [src]="produit.image" alt="{{produit.nom}}">
+    <h2>{{produit.nom}}: {{produit.prix}}</h2>
+    <button *ngIf="produit.description" (click)="onDetail(produit)">
+       Details
+    </button>
+  </div>
+</div>
