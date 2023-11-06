@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {CATALOGUE} from '../../../shared/mock-data/catalogue-produits' ;
+import { Component, OnInit, Input } from '@angular/core';
+import { CATALOGUE } from '../../../shared/mock-data/catalogue-produits';
 import { Produit } from 'src/app/shared/models/produit';
 
 @Component({
@@ -8,11 +8,22 @@ import { Produit } from 'src/app/shared/models/produit';
   styleUrls: ['./home-products.component.css']
 })
 export class HomeProductsComponent implements OnInit {
-  onDetail(produit: Produit) {
-    alert(produit.description);
-  }
-  title = "PRODUITS" ;
-  produits = CATALOGUE ;
+  @Input() pr: any;
+  title = 'Products';
+  produits: Produit[] = CATALOGUE;
+  selectedProduit!: Produit | null;
 
   ngOnInit(): void {}
+
+  onDetail(produit: Produit): void {
+    alert(produit.description);
   }
+
+  onSelect(produit: Produit): void {
+    this.selectedProduit = produit;
+  }
+
+  onClose(): void {
+    this.selectedProduit = null;
+  }
+}

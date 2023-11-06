@@ -1,24 +1,15 @@
-<style>
-    .product-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-      
-    .product-item {
-    flex: 1 0 21%;
-    margin: 1em;
-    box-sizing: border-box;
-    }
-</style>
+<h1>{{ title }}</h1>
 
-<h1>{{title}}</h1>
 <div class="product-list">
-  <div *ngFor="let produit of produits" class="product-item">
-    <img style="width: 100px;" [src]="produit.image" alt="{{produit.nom}}">
-    <h2>{{produit.nom}}: {{produit.prix}}</h2>
-    <button *ngIf="produit.description" (click)="onDetail(produit)">
-       Details
-    </button>
+  <div *ngFor="let product of produits" class="product-item" (click)="onSelect(product)">
+    <h5>{{ product.nom }}</h5>
+    <img [src]="product.image" alt="{{ product.nom }}" width="100">
+    <h2>{{ product.nom }}: {{ product.prix }}</h2>
+    <button *ngIf="product.description" (click)="onDetail(product)">Details</button>
   </div>
+</div>
+
+<div class="selected-product" *ngIf="selectedProduit">
+  <button class="close-button" (click)="onClose()">X</button>
+  <img [src]="selectedProduit.image" alt="{{ selectedProduit.nom }}">
 </div>
